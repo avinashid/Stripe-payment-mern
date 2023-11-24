@@ -3,7 +3,7 @@ const SubscriptionData = require("../models/SubscriptionModel");
 const endpointSecret =
   "whsec_26db93c292761d1c11251a766a88bba83b4f300b00352775a2f8015309f95077";
 
-const YOUR_DOMAIN = "http://localhost:5173";
+const YOUR_DOMAIN = "https://avinashid.github.io/Stripe-payment-mern/#";
 const getCoupons = async (req, res) => {
   try {
     const couponCode = req.body.couponCode;
@@ -61,7 +61,7 @@ const sessionStatus = async (req, res) => {
   }
 };
 
-const subscriptionData = async ( checkoutSessionCompleted ) => {
+const subscriptionData = async (checkoutSessionCompleted) => {
   try {
     const session = await SubscriptionData.create({
       sessionid: checkoutSessionCompleted.id,
@@ -69,7 +69,7 @@ const subscriptionData = async ( checkoutSessionCompleted ) => {
       amount_total: checkoutSessionCompleted.amount_total,
       email: checkoutSessionCompleted.customer_email,
       name: checkoutSessionCompleted.customer_details.name,
-      phone:  0,
+      phone: 0,
       address: checkoutSessionCompleted.customer_details.address.country,
       invoice: checkoutSessionCompleted.invoice,
       payment_status: checkoutSessionCompleted.payment_status,
