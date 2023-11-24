@@ -10,7 +10,7 @@ export const Return = () => {
     const urlParams = new URLSearchParams(queryString);
     const sessionId = urlParams.get("session_id");
 
-    fetch(`http://localhost:5000/session-status?session_id=${sessionId}`)
+    fetch(`https://stripe-payment-mern.onrender.com/session-status?session_id=${sessionId}`)
       .then((res) => res.json())
       .then((data) => {
         setStatus(data.status);

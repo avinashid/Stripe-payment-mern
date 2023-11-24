@@ -28,9 +28,12 @@ export const SubscriptionInfo = () => {
       setCouponValid(true);
       setCouponInfo("");
     } else {
-      const res = await axios.post("http://localhost:5000/api/getCoupons", {
-        couponCode: e.target.value,
-      });
+      const res = await axios.post(
+        "https://stripe-payment-mern.onrender.com/api/getCoupons",
+        {
+          couponCode: e.target.value,
+        }
+      );
       if (res.data.length !== 0) {
         console.log(res.data[0].id);
         setCouponApplied(true);
@@ -120,7 +123,9 @@ export const SubscriptionInfo = () => {
               disabled={!couponValid}
               type="submit"
               className={`input  text-lg text-white ${
-                (couponApplied || userData.coupon === "") ? "bg-blue-700":"bg-gray-400"
+                couponApplied || userData.coupon === ""
+                  ? "bg-blue-700"
+                  : "bg-gray-400"
               }`}
             >
               Checkout

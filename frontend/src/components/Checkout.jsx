@@ -20,7 +20,7 @@ export const Checkout = ({ stripePromise }) => {
     const fetchCheckout = async () => {
       try {
         const res = await axios.post(
-          "http://localhost:5000/create-checkout-session",
+          "https://stripe-payment-mern.onrender.com/create-checkout-session",
           {
             userData: data,
           }
