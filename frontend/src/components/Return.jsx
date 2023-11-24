@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import { Navigate } from "react-router-dom";
 
 export const Return = () => {
@@ -15,9 +15,9 @@ export const Return = () => {
       .then((data) => {
         setStatus(data.status);
         setCustomerEmail(data.customer_email);
+        
       });
   }, []);
-
   if (status === "open") {
     return <Navigate to="/checkout" />;
   }

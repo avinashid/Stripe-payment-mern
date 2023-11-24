@@ -18,15 +18,18 @@ export const Checkout = ({ stripePromise }) => {
 
   useEffect(() => {
     const fetchCheckout = async () => {
-      const res = await axios.post(
-        "http://localhost:5000/create-checkout-session",
-        {
-          userData: data,
-        }
-      );
-      if (res.status === 500) navigate("/");
-      const response = res.data;
-      setClientSecret(response.clientSecret);
+      try {
+        const res = await axios.post(
+          "http://localhost:5000/create-checkout-session",
+          {
+            userData: data,
+          }
+        );
+        const response = res.data;
+        setClientSecret(response.clientSecret);
+      } catch (error) {
+        console.log(error.message), navigate("/");
+      }
     };
     fetchCheckout();
   }, []);

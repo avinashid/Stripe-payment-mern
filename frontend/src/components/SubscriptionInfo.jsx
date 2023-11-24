@@ -10,12 +10,14 @@ export const SubscriptionInfo = () => {
   const [couponValid, setCouponValid] = useState(true);
   const [couponApplied, setCouponApplied] = useState(false);
   const [couponInfo, setCouponInfo] = useState("");
+  const [couponId, setCouponId] = useState("");
   const userData = useSelector((state) => state.userDataSlice);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   console.log(userData);
 
   const handleCoupon = async (e) => {
+    dispatch(changeValue({ value: "couponId", newValue: "" }));
     setCouponApplied(false);
     setCouponInfo("Loading...");
     dispatch(changeValue({ value: "coupon", newValue: e.target.value }));
@@ -30,9 +32,11 @@ export const SubscriptionInfo = () => {
         couponCode: e.target.value,
       });
       if (res.data.length !== 0) {
+        console.log(res.data[0].id);
         setCouponApplied(true);
         setCouponValid(true);
         setCouponInfo("Congratulations: 50% Off");
+        dispatch(changeValue({ value: "couponId", newValue: res.data[0].id }));
       } else {
         setCouponInfo("Not a valid coupon");
       }
@@ -46,18 +50,18 @@ export const SubscriptionInfo = () => {
   };
   return (
     <div className="flex border border-gray md:flex-row shadow-xl justify-center m-4 p-4 gap-4 flex-col items-center m-auto w-9/12 max-w-[600px]">
-      <div className="flex-1 border-b  md:border-r mx-4 pb-6 md:pb-0 md:border-b-0 text-9xl text-blue-600 justify-center flex">
+      <div className="flex-1 border-b flex  md:border-r mx-4 pb-6 md:pb-0 md:border-b-0 text-9xl text-blue-600 justify-center flex">
         <MdWorkspacePremium />
       </div>
-      <div className="flex-1 self-start flex flex-col gap-4">
-        <div className="text-xl">
+      <div className="flex-1 w-full self-start flex flex-col gap-4">
+        <div className="text-xl flex-1">
           HeyDaw <div className="text-4xl text-blue-500">Premium</div>
         </div>
         <div className="text-xs text-gray-500 indent-1">
           Please provide your contact details to continue.
         </div>
-        <div className="">
-          <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+        <div className="flex-2 flex w-full">
+          <form className="flex flex-col gap-4 w-full" onSubmit={handleSubmit}>
             <input
               onChange={(e) =>
                 dispatch(
@@ -115,7 +119,9 @@ export const SubscriptionInfo = () => {
             <button
               disabled={!couponValid}
               type="submit"
-              className="input bg-gray-400 text-lg text-white"
+              className={`input  text-lg text-white ${
+                (couponApplied || userData.coupon === "") ? "bg-blue-700":"bg-gray-400"
+              }`}
             >
               Checkout
             </button>

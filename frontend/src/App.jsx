@@ -23,7 +23,7 @@ const App = () => {
             }
           />
           <Route path="/checkout" element={<Checkout stripePromise={stripePromise}/>} />
-          <Route path="/return" element={<Return />} />
+          <Route path="/return" element={<Return stripePromise={stripePromise}/>} />
         </Routes>
       </Router>
     </div>
