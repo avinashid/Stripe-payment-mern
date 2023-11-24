@@ -3,7 +3,7 @@ const SubscriptionData = require("../models/SubscriptionModel");
 const endpointSecret =
   "whsec_26db93c292761d1c11251a766a88bba83b4f300b00352775a2f8015309f95077";
 
-const YOUR_DOMAIN = "https://avinashid.github.io/Stripe-payment-mern/#";
+const YOUR_DOMAIN = "https://avinashid.github.io/Stripe-payment-mern";
 const getCoupons = async (req, res) => {
   try {
     const couponCode = req.body.couponCode;
